@@ -1,4 +1,4 @@
-import {Suspense} from 'react';
+import React, {Suspense} from 'react';
 import {Await, NavLink, useAsyncValue} from '@remix-run/react';
 import {useAnalytics, useOptimisticCart} from '@shopify/hydrogen';
 import {useAside} from '~/components/Aside';
@@ -54,7 +54,8 @@ export function HeaderMenu({
           Home
         </NavLink>
       )}
-      {(menu || FALLBACK_HEADER_MENU).items.map((item) => {
+      <div className="header-menu-item" onClick={sendToShopifyHome}>Home</div>
+      {( FALLBACK_HEADER_MENU).items.map((item) => {
         if (!item.url) return null;
 
         // if the url is internal, we strip the domain
@@ -222,7 +223,9 @@ function activeLinkStyle({isActive, isPending}) {
     color: isPending ? 'grey' : 'black',
   };
 }
-
+function sendToShopifyHome() {
+    window.location.href = 'https://devnewre.myshopify.com/';
+}
 /** @typedef {'desktop' | 'mobile'} Viewport */
 /**
  * @typedef {Object} HeaderProps
